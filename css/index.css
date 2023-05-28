@@ -1,0 +1,129 @@
+header {
+  width: 100%;
+}
+header h1 {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+form {
+  width: 100%;
+  padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.6rem;
+
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+
+  background-color: #d0e8f2;
+
+  /* 아래로 스크롤 내려도 최상단에 계속 보였으면 좋겠음 */
+  position: sticky;
+  top: 0;
+}
+form > span,
+form > input,
+form > button {
+  margin: 0 10px;
+  font-weight: 400;
+}
+form > input {
+  width: 200px;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  font-size: 1rem;
+}
+form > button {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  font-size: 1rem;
+}
+form > button:hover {
+  cursor: pointer;
+}
+section {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  /* section 안의 item들을 양끝 left, right만 따로 설정해주고 item들 사이 공간은 자동 배치되고록 설정 */
+  justify-content: space-between;
+
+  /* 아래 card-bg에서 width 설정에 따라 넘치는 부분은 줄이? 바뀌도록 함 */
+  flex-wrap: wrap;
+}
+.card-bg {
+  /* 반응형 배치 계획 => 데이스탑에서 카드 2개씩(width: 50%), 모바일 카드 1개씩(width: 100%) */
+  width: 25%;
+  padding: 1px 1px;
+
+  /* card-content가 가운데 안오고 자꾸 왼쪽으로 치우쳐서 가운데로 위치시키기*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #d0e8f2;
+}
+.card-content {
+  /* 화면 크기에 따라 카드 너비, 높이가 바뀌면 안예쁠 것 같아서 고정! */
+  width: 280px;
+  height: 95vh; /* 창사이즈 세로폭의 95% */
+
+  margin: 20px 0;
+  padding: 20px 20px;
+
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+
+  background-color: #fcf8ec;
+}
+.card-content:hover {
+  cursor: pointer;
+}
+.card-content img {
+  width: 240px;
+  height: 370px;
+  border-radius: 10px;
+}
+.card-content h3,
+.card-overview,
+.card-rating {
+  padding-top: 5px;
+}
+.card-content h3 {
+  margin-top: 5px;
+  font-size: 22px;
+  font-weight: 500;
+}
+.card-overview {
+  overflow: hidden;
+  /* 문자열을 자르고 말 줄임표를 붙임 */
+  text-overflow: ellipsis;
+
+  /* movie title이 2줄 초과로 넘어가지 않는 다는 가정하에 최대 길이는 11줄로 설정 */
+  display: -webkit-box;
+  -webkit-line-clamp: 10; /* 라인 수 */
+  -webkit-box-orient: vertical;
+
+  /* word-break: normal 과 overflow-wrap: anywhere */
+  word-wrap: break-word;
+  line-height: 1.2em;
+  height: 12em; /* line-height x 라인수 */
+  padding-bottom: 10px;
+}
+.card-rating {
+  margin-top: 10px;
+}

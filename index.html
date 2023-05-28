@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ※ reset.css | 👉 동일한 CSS 스타일을 보여주기 위해  웹브라우저마다 적용되어 있는 default 스타일 값을 초기화 주는 파일 -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- layout은 header, form, section으로 나눔 -->
+    <header>
+      <h1>최고 평점 영화 콜렉션</h1>
+    </header>
+    <form action="">
+      <span>영화 검색 : </span>
+      <input type="text" placeholder="영화 제목을 검색해 보세요" />
+      <button>검색</button>
+    </form>
+    <section>
+      <div class="card-bg">
+        <div class="card-content">
+          <!-- 이미지 크기 260*390 -->
+          <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="movie image" />
+          <h3>movie title</h3>
+          <p class="card-overview">
+            overview : Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum iste voluptas labore adipisci omnis
+            sint debitis, consequuntur earum et quasi aut ducimus. Enim ad, sapiente dignissimos amet voluptate quidem
+            commodi Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur labore modi mollitia tempora
+            aspernatur ea, veritatis illum vero nobis iure animi in quis quidem consequuntur, quisquam nostrum maxime
+            aliquam neque.
+          </p>
+          <p class="card-rating">rating 8.5</p>
+        </div>
+      </div>
+      <div class="card-bg">
+        <div class="card-content">
+          <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="movie image" />
+          <h3>movie title <br />movie title</h3>
+          <p class="card-overview">
+            overview : Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum iste voluptas labore adipisci omnis
+            sint debitis, consequuntur earum et quasi aut ducimus. Enim ad, sapiente dignissimos amet voluptate quidem
+            commodi Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur labore modi mollitia tempora
+            aspernatur ea, veritatis illum vero nobis iure animi in quis quidem consequuntur, quisquam nostrum maxime
+            aliquam neque.
+          </p>
+          <p class="card-rating">rating 8.5</p>
+        </div>
+      </div>
+      <div class="card-bg">
+        <div class="card-content">
+          <img src="" alt="movie image" />
+          <h3>movie title</h3>
+          <p class="card-overview">overview</p>
+          <p class="card-rating">rating 8.5</p>
+        </div>
+      </div>
+      <div class="card-bg">
+        <div class="card-content">
+          <img src="" alt="movie image" />
+          <h3>movie title</h3>
+          <p class="card-overview">overview</p>
+          <p class="card-rating">rating 8.5</p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjdkNzRhNTRiYzEzNTE4ZDgyMTc1MjAzNzM4MzliNSIsInN1YiI6IjY0NzA4OGI1NTQzN2Y1MDE0NzVmMDU0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FaD0cXTgqDH5QUE4-ZoUBQJFr9fuQMr0VtpdOJEbTxE',
+        },
+      };
+
+      fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+    </script>
+  </body>
+</html>
