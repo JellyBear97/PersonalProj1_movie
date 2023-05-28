@@ -92,6 +92,8 @@ section {
 }
 .card-content:hover {
   cursor: pointer;
+
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.6);
 }
 .card-content img {
   width: 240px;
