@@ -57,6 +57,14 @@ form > button:hover {
   transition: all 0.5s;
   box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.5) inset;
 }
+#audio {
+  position: absolute;
+  top: 2;
+  right: 10px;
+  z-index: 11;
+
+  padding: 10px 5px;
+}
 .scrollUp {
   position: fixed;
   bottom: 20px;
@@ -97,7 +105,7 @@ section {
 }
 .card-bg {
   /* 반응형 배치 계획 => 데이스탑에서 카드 2개씩(width: 50%), 모바일 카드 1개씩(width: 100%) */
-  width: 25%;
+  width: 33%;
   padding: 1px 1px;
 
   /* card-content가 가운데 안오고 자꾸 왼쪽으로 치우쳐서 가운데로 위치시키기*/
@@ -168,3 +176,6 @@ section {
 .card-rating {
   margin-top: 10px;
 }
+
+/* 반응형 해보려고 했는데, 카드밖에 없으니까 뭔가 휑해보여서 이 평범한 디자인?으로는
+ 웹전용으로 고정하는게 나을거라 생각되어 반응형 안넣음 */
