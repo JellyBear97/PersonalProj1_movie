@@ -1,3 +1,7 @@
+* {
+  font-family: 'SF Pro Display', 'AppleSDGothicNeo', 'Malgun Gothic', '\B9D1\C740 \ACE0\B515', '\B3CB\C6C0', dotum,
+    sans-serif;
+}
 header {
   width: 100%;
 }
@@ -53,8 +57,34 @@ form > button:hover {
   transition: all 0.5s;
   box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.5) inset;
 }
+.scrollUp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+
+  border-radius: 100%;
+  padding: 8px 10px;
+
+  font-size: 20px;
+  color: white;
+
+  background-color: #769fcd;
+
+  /* 💙 왜... border만 쓰면 갑자기 안되는거지.. ? */
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+}
+.scrollUp:hover {
+  cursor: pointer;
+  border-color: skyblue;
+}
 section {
+  background-color: #d0e8f2;
+
   width: 100%;
+  padding: 0 48px;
 
   display: flex;
   flex-direction: row;

@@ -22,6 +22,7 @@
       <input id="search-input" type="text" placeholder="영화 제목을 검색해 보세요" autofocus />
       <button type="submit" id="searchMovie">검색</button>
     </form>
+    <button class="scrollUp" onclick="window.scrollTo(0,0)">⬆︎</button>
     <section id="cards">
       <div class="card-bg">
         <div class="card-content">
@@ -160,7 +161,7 @@
 
           // TagName으로 호출할 때는 몇번째의 tag를 사용할 건지 명시해주어야함.
           // Element.insertAdjacentHTML() 사용하여 원하는 위치에 특정텍스트 파싱 후 특정 위치에 node(요소같은 거)추가
-          document.getElementsByTagName('section')[0].insertAdjacentHTML('afterbegin', temp_html);
+          document.getElementsByTagName('section')[0].insertAdjacentHTML('beforeend', temp_html);
 
           // 지은아 정신차려.. 매개변수 자리 들어갈 함수는 밖에서 정의한거 써도됨!! 미리 정의하고 들어가면 보기도 깔끔하겼죠?
           function showSearch(event) {
@@ -245,7 +246,7 @@
                                 </div>
                               </div>
                               `;
-                document.getElementById('cards').insertAdjacentHTML('afterbegin', temp_html);
+                document.getElementById('cards').insertAdjacentHTML('beforeend', temp_html);
               }
             });
           }
