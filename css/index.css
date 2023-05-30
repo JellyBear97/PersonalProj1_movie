@@ -105,7 +105,7 @@ section {
 }
 .card-bg {
   /* 반응형 배치 계획 => 데이스탑에서 카드 2개씩(width: 50%), 모바일 카드 1개씩(width: 100%) */
-  width: 33%;
+  width: 25%;
   padding: 1px 1px;
 
   /* card-content가 가운데 안오고 자꾸 왼쪽으로 치우쳐서 가운데로 위치시키기*/
