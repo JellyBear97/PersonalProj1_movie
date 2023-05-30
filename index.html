@@ -17,7 +17,7 @@
 
     <!-- 💙💜 내배캠에서 제공한 예시 sources 이용했슴다.. button type이 submit이면.. form 속성으로 onsubmit="함수.."가 있어야하는 것인가..? -->
     <!-- form내부요소 위치는 화면 줄어들 때 바꿀거야! 왼쪽으로 밀어야지! -->
-    <form id="form">
+    <form id="form" name="myForm">
       <label for="search-input">영화 검색 : </label>
       <!-- 자동 마우스 커서 input에 위치시키기 autofocus -->
       <input id="search-input" type="text" placeholder="영화 제목을 검색해 보세요" autofocus />
@@ -26,8 +26,8 @@
       <!-- 시멘틱태그에 관련없는 내용 집어넣어도 되나.. -->
       <!-- audio는 controls 속성이 있어야 보임.. -->
       <audio id="audio" controls loop>
-        <source src="audio/little_dramatic.mp3" />
         <source src="audio/backgroundMusic.mp3" />
+        <source src="audio/little_dramatic.mp3" />
       </audio>
     </form>
     <button class="scrollUp" onclick="window.scrollTo(0,0)">⬆︎</button>
@@ -47,7 +47,7 @@
           <p class="card-rating">rating 8.5</p>
         </div>
       </div>
-      <div class="card-bg">
+      <!-- <div class="card-bg">
         <div class="card-content">
           <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="movie image" />
           <h3>movie title <br />movie title</h3>
@@ -76,7 +76,7 @@
           <p class="card-overview">overview</p>
           <p class="card-rating">rating 8.5</p>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <script>
@@ -105,7 +105,7 @@
         fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
           .then(response => response.json())
           .then(json => {
-            console.log(json);
+            console.log('json부분 => ', json);
 
             // 💙 여기서 받은 정보 다 해결하고 싶은데 아래의 .catch(어쩌구) 때문에 문제생길까봐 일단 다른 함수로 보내는 방법 선택
             displayItems(json);
@@ -259,6 +259,12 @@
             });
           }
 
+          // 엔터시 Javascript로 이벤트를 무효화... => 안되네 엔터치면 왜자꾸 검색되는거져..
+          // document.myForm.addEventListener('keydown', evt => {
+          //   if ((evt.keyCode || evt.which) === 13) {
+          //     evt.preventDefalut();
+          //   }
+          // });
           document.getElementById('form').addEventListener('submit', showSearch);
         });
       }

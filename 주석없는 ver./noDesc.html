@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../주석없는 ver./noDesc.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <h1>최고 평점 영화 콜렉션</h1>
+    </header>
+
+    <form id="form">
+      <label for="search-input">영화 검색 : </label>
+      <input id="search-input" type="text" placeholder="영화 제목을 검색해 보세요" autofocus />
+      <button type="submit" id="searchMovie">검색</button>
+
+      <audio id="audio" controls loop>
+        <source src="../audio/little_dramatic.mp3" />
+        <source src="../audio/backgroundMusic.mp3" />
+      </audio>
+    </form>
+
+    <button class="scrollUp" onclick="window.scrollTo(0,0)">⬆︎</button>
+
+    <section id="cards">
+      <div class="card-bg">
+        <div class="card-content">
+          <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="movie image" />
+          <h3>movie title</h3>
+          <p class="card-overview">
+            overview : Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum iste voluptas labore adipisci omnis
+            sint debitis, consequuntur earum et quasi aut ducimus. Enim ad, sapiente dignissimos amet voluptate quidem
+            commodi Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur labore modi mollitia tempora
+            aspernatur ea, veritatis illum vero nobis iure animi in quis quidem consequuntur, quisquam nostrum maxime
+            aliquam neque.
+          </p>
+          <p class="card-rating">rating 8.5</p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      window.onload = function () {
+        getMovieAPI();
+      };
+
+      function alertId(movieId) {
+        alert(`영화 id : ${movieId}`);
+      }
+
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization:
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhYjdkNzRhNTRiYzEzNTE4ZDgyMTc1MjAzNzM4MzliNSIsInN1YiI6IjY0NzA4OGI1NTQzN2Y1MDE0NzVmMDU0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FaD0cXTgqDH5QUE4-ZoUBQJFr9fuQMr0VtpdOJEbTxE',
+        },
+      };
+
+      function getMovieAPI() {
+        fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+          .then(response => response.json())
+          .then(json => {
+            console.log(json);
+
+            displayItems(json);
+          })
+          .catch(err => console.error(err));
+      }
+
+      function displayItems(movieInfos) {
+        let movies = movieInfos['results'];
+
+        let parent = document.getElementsByTagName('section')[0];
+        let children = parent.querySelectorAll('.card-bg');
+
+        children.forEach(child => {
+          parent.removeChild(child);
+        });
+
+        movies.forEach(movie => {
+          let id = movie['id'];
+          let title = movie['title'];
+          let overview = movie['overview'];
+          let poster_path = 'https://image.tmdb.org/t/p/w500' + movie['poster_path'];
+          let vote_average = movie['vote_average'];
+          let temp_html = `
+          <div class="card-bg">
+            <div id="${id}" class="card-content" onclick="alertId(this.id)">
+              <!-- 이미지 크기 260*390 -->
+              <img src="${poster_path}" alt="movie image" />
+              <h3>${title}</h3>
+              <p class="card-overview">
+                ${overview}
+              </p>
+              <p class="card-rating">Rating : ${vote_average}</p>
+            </div>
+          </div>
+          `;
+
+          document.getElementsByTagName('section')[0].insertAdjacentHTML('beforeend', temp_html);
+
+          function showSearch(event) {
+            event.preventDefault();
+
+            let input_str = document.getElementById('search-input').value; // DOM의 속성 value를 이용해서 해당 요소의 값을 가져오기
+            console.log(input_str);
+
+            // 자!! search input을 가져왔으니 이제 해당 문자(input_str)를 포함한 '영화 title'을 가진 '영화 카드'를 보여주면 되겠죠?
+            /** 특정 문자를 포함한 문자열 찾기.
+            ※ 설계 (일단 '영화 뭉치 식별자명은 movies!' / '영화리스트 비우고 채울 공간 id명 = cards' / '각 카드의 class명 : card-bg')
+              1. 카드 리스팅할 공간 비우기!  | 검색한 내용을 반영해서, 카드를 보여줘야하기 때문에
+              2. .forEach() 메서드로 movie를 하나씩 가져온다. 단, if문을 이용하여 input_str을 포함하는 title을 가진 영화만 가져오기!
+              3. 해당되는 영화 list로 붙여주기
+             */
+            // 🍀 1. 카드 리스팅할 공간 비우기
+
+            let parent = document.getElementsByTagName('section')[0];
+
+            let children = parent.querySelectorAll('.card-bg');
+
+            /** 💜✏️  ㄴ 'document.getElementsByTagName('section')[0]'와 'DOM의 메서드 .removeChild()' 를 잘 이해하지 못하는 것 같아서 필기!
+              ✏️ let parent = document.getElementsByTagName('section')[0] 일 때
+                  -  console.log(parent) 의 결과는 0번째에 해당하는 section tag를 포함한 하위요소 전체를 지칭.
+                    즉, 해당 selector에 해당하는 document(html tag 내용!)을 가리킨다고 보면됨!!!!
+              ✏️ DOM의 메서드 '상위요소 "이것"'.removeChild('하위요소 "이것"')
+                  - 잘못 이해한 방식 : "parent.removeChild(child)가 있을 때, 상위요소 parent에 있는 하위 '선택자Child'를 모두 삭제해줘." --> "[틀린이유는]저기 들어가는 child는 선택자명이 아니라 document임"
+                  - 의미 : '상위요소 "이것"'에 있는 '하위요소 "이것"'을 삭제해줘.
+             */
+
+            children.forEach(child => {
+              parent.removeChild(child);
+            });
+
+            // 🍀  2. .forEach() 메서드로 movie를 하나씩 가져온다. 단, if문을 이용하여 input_str을 포함하는 title을 가진 영화만 가져오기!
+            // console.log('showSearch()에서 movies 찍히는지 test => ', movies); // 잘찍힘
+            movies.forEach(movie => {
+              let title = movie['title'];
+
+              // 1. 가져온 movie에 있는 title 가져와서 input_str과 문자열 비교 | 문자열에 특정 문자가 포함이 되었는가
+              // 1-1. 소대문자 상관없이 찾기 | 두 문자열 전부 소문자로 변경 | string.toLowerCase();
+              let sTitle = title.toLowerCase();
+              let sInput_str = input_str.toLowerCase();
+
+              // // 1-2. 문자열 포함 여부 | 문자열.indexOf(문자) : -1(=false) or 1(true) 반환 // 문자열.includes(문자) : false or true 반환
+              if (sTitle.includes(sInput_str)) {
+                let id = movie['id'];
+                let overview = movie['overview'];
+                let poster_path = 'https://image.tmdb.org/t/p/w500' + movie['poster_path'];
+                let vote_average = movie['vote_average'];
+                let temp_html = `
+                              <div class="card-bg">
+                                <div id="${id}" class="card-content" onclick="alertId(this.id)">
+                                  <!-- 이미지 크기 260*390 -->
+                                  <img src="${poster_path}" alt="movie image" />
+                                  <h3>${title}</h3>
+                                  <p class="card-overview">
+                                    ${overview}
+                                  </p>
+                                  <p class="card-rating">Rating : ${vote_average}</p>
+                                </div>
+                              </div>
+                              `;
+                document.getElementById('cards').insertAdjacentHTML('beforeend', temp_html);
+              }
+            });
+          }
+
+          document.getElementById('form').addEventListener('submit', showSearch);
+        });
+      }
+
+      /** form data 발/수신
+      1. 영화 검색의 '검색버튼' 클릭시 'input에 입력된 내용' JS로 전송
+      2. input값의 false/true 판단
+        2-1. input값 false일 경우 ➡︎ alert('값을 입력해주세요') -- 유효성 검사
+        2-2. input값 true일 경우 ➡︎ ⓵검색창에 입력값 남긴채  ⓶JS정보 처리할 곳으로 전송
+      3. 💙 영화 정보꾸러미 중에 input값에서 받은 정보(문자열)를 포함하는 '영화제목'을 찾아
+        해당 영화카드만 보여주기
+      */
+    </script>
+  </body>
+</html>
