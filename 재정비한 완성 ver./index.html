@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- layout은 header, form, section으로 나눔 -->
+    <header>
+      <h1>최고 평점 영화 콜렉션</h1>
+    </header>
+
+    <form id="form" name="myForm">
+      <label for="search-input">영화 검색 : </label>
+      <!-- 자동 마우스 커서 input에 위치시키기 autofocus -->
+      <input id="search-input" type="text" placeholder="영화 제목을 검색해 보세요" autofocus required />
+      <button type="submit" id="searchMovie">검색</button>
+    </form>
+
+    <button class="scrollUp" onclick="window.scrollTo(0,0)">⬆︎</button>
+
+    <section id="cards">
+      <!-- card 1set : .card-bg -->
+      <div class="card-bg">
+        <div class="card-content" id="">
+          <!-- 이미지 크기 260*390 -->
+          <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="movie image" />
+          <h3>movie title</h3>
+          <p class="card-overview">
+            overview : Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum iste voluptas labore adipisci omnis
+            sint debitis, consequuntur earum et quasi aut ducimus. Enim ad, sapiente dignissimos amet voluptate quidem
+            commodi Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur labore modi mollitia tempora
+            aspernatur ea, veritatis illum vero nobis iure animi in quis quidem consequuntur, quisquam nostrum maxime
+            aliquam neque.
+          </p>
+          <p class="card-rating">rating 8.5</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="./main.js"></script>
+  </body>
+</html>

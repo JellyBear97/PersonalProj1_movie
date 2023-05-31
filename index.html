@@ -181,6 +181,11 @@
             let input_str = document.getElementById('search-input').value; // DOM의 속성 value를 이용해서 해당 요소의 값을 가져오기
             console.log(input_str);
 
+            if (input_str === null || input_str === ' ') {
+              aleret('검색어를 입력해주세요');
+              return;
+            }
+
             // 자!! search input을 가져왔으니 이제 해당 문자(input_str)를 포함한 '영화 title'을 가진 '영화 카드'를 보여주면 되겠죠?
             /** 특정 문자를 포함한 문자열 찾기.
             ※ 설계 (일단 '영화 뭉치 식별자명은 movies!' / '영화리스트 비우고 채울 공간 id명 = cards' / '각 카드의 class명 : card-bg')
