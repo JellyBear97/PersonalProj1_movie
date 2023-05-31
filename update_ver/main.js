@@ -68,19 +68,23 @@ let searchedMovieShow = function (event) {
   console.log(movie_collection);
 
   // ? 아래 changed_movie_list 같은 변수는 안쓰는 거니까 굳이 할당문 안써줘도 되나요?
+  let count = 0;
   let changed_movie_list = [...movie_collection].map(movie => {
     let movie_title_str = movie.querySelector('.movie_title').textContent;
     let compare_target = movie_title_str.split(' ').join('').toLowerCase();
     if (!compare_target.includes(trim_searchMovie_str)) {
       movie.classList.add('hide');
+      count++;
       return;
     }
     movie.classList.remove('hide');
   });
+  console.log(count);
 
   // movie랑 맞는 검색결과가 없을 경우 -> 페이지 새로고침
-  // ! [주의] api로 받아오는 영화 자료가 20개라 가정하고 짠 코드임. 알고있습니다..ㅎㅎ
-  if (document.querySelectorAll('.hide').length === 20) {
+  // count : 검색어와 일치하는 문자가 없어 '.hide' class 를 가지고 있는 카드 수 (hide된 카드 수)
+  if (count === changed_movie_list.length) {
+    count = 0;
     alert('검색결과가 없습니다.');
     location.reload();
   }
