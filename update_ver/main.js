@@ -73,13 +73,13 @@ let searchedMovieShow = function (event) {
     let compare_target = movie_title_str.split(' ').join('').toLowerCase();
     if (!compare_target.includes(trim_searchMovie_str)) {
       movie.classList.add('hide');
-    } else {
-      movie.classList.remove('hide');
+      return;
     }
+    movie.classList.remove('hide');
   });
 
   // movie랑 맞는 검색결과가 없을 경우 -> 페이지 새로고침
-  // ! [주의] api로 받아오는 영화 자료가 20개라 가정하고 짠 코드임.
+  // ! [주의] api로 받아오는 영화 자료가 20개라 가정하고 짠 코드임. 알고있습니다..ㅎㅎ
   if (document.querySelectorAll('.hide').length === 20) {
     alert('검색결과가 없습니다.');
     location.reload();

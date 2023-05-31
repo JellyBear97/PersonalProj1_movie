@@ -80,9 +80,10 @@ form > button:hover {
   background-color: #769fcd;
 
   /* 💙 왜... border만 쓰면 갑자기 안되는거지.. ? */
-  border-style: solid;
+  /* border-style: solid;
   border-color: gray;
-  border-width: 1px;
+  border-width: 1px; */
+  border: 1px solid gray;
 }
 .scrollUp:hover {
   cursor: pointer;
@@ -164,13 +165,13 @@ section {
 
   /* movie title이 2줄 초과로 넘어가지 않는 다는 가정하에 최대 길이는 11줄로 설정 */
   display: -webkit-box;
-  -webkit-line-clamp: 10; /* 라인 수 */
+  -webkit-line-clamp: 7; /* 라인 수 */
   -webkit-box-orient: vertical;
 
   /* word-break: normal 과 overflow-wrap: anywhere */
   word-wrap: break-word;
   line-height: 1.2em;
-  height: 12em; /* line-height x 라인수 */
+  height: 8.4em; /* line-height x 라인수 */
   padding-bottom: 10px;
 }
 .card-rating {

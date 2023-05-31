@@ -80,9 +80,10 @@ form > button:hover {
   background-color: #769fcd;
 
   /* 💙 왜... border만 쓰면 갑자기 안되는거지.. ? */
-  border-style: solid;
+  /* border-style: solid;
   border-color: gray;
-  border-width: 1px;
+  border-width: 1px; */
+  /* border: 1px solid gray; */
 }
 .scrollUp:hover {
   cursor: pointer;
