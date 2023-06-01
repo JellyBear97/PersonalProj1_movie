@@ -54,7 +54,7 @@ let searchedMovieShow = function (event) {
   let searchMovie_str = document.querySelector('#search-input').value;
 
   // 문자열 공백->빈값, 공백만 입력했을 경우 '문자 입력' alert 후 함수 빠져나가기
-  let trim_searchMovie_str = searchMovie_str.split(' ').join('').toLowerCase();
+  let trim_searchMovie_str = searchMovie_str.replace(/ /g, '').toLowerCase();
   if (trim_searchMovie_str === '') {
     alert('문자를 입력해주세요');
     return;
@@ -66,7 +66,7 @@ let searchedMovieShow = function (event) {
   let count = 0;
   let changed_movie_list = [...movie_collection].map(movie => {
     let movie_title_str = movie.querySelector('.movie_title').textContent;
-    let compare_target = movie_title_str.split(' ').join('').toLowerCase();
+    let compare_target = movie_title_str.replace(/ /g, '').toLowerCase();
     if (!compare_target.includes(trim_searchMovie_str)) {
       movie.classList.add('hide');
       count++;
