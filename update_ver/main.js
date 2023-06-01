@@ -17,8 +17,6 @@ let allMovieShow = function () {
   fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', OPTIONS)
     .then(response => response.json())
     .then(movieDummy => {
-      console.log('this is movieDummy', movieDummy);
-
       all_movie_infos = movieDummy['results'];
       let temp_html = ``;
       all_movie_infos.forEach(movie => {
@@ -57,17 +55,14 @@ let searchedMovieShow = function (event) {
 
   // 문자열 공백->빈값, 공백만 입력했을 경우 '문자 입력' alert 후 함수 빠져나가기
   let trim_searchMovie_str = searchMovie_str.split(' ').join('').toLowerCase();
-  console.log(trim_searchMovie_str);
   if (trim_searchMovie_str === '') {
     alert('문자를 입력해주세요');
     return;
-  } // ? else 꼭 안써도 되는 거인가요?
+  }
 
   // document에서 title 가져오기
   let movie_collection = document.querySelectorAll('.card-bg');
-  console.log(movie_collection);
 
-  // ? 아래 changed_movie_list 같은 변수는 안쓰는 거니까 굳이 할당문 안써줘도 되나요?
   let count = 0;
   let changed_movie_list = [...movie_collection].map(movie => {
     let movie_title_str = movie.querySelector('.movie_title').textContent;
@@ -79,7 +74,6 @@ let searchedMovieShow = function (event) {
     }
     movie.classList.remove('hide');
   });
-  console.log(count);
 
   // movie랑 맞는 검색결과가 없을 경우 -> 페이지 새로고침
   // count : 검색어와 일치하는 문자가 없어 '.hide' class 를 가지고 있는 카드 수 (hide된 카드 수)
